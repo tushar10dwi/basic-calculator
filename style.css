@@ -1,0 +1,68 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+}
+
+.calculatorBody {
+    display: flex;
+    flex-direction: column;
+    background-color:beige;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.displayMonitor {
+    width: 300px;
+    height: 75px;
+    background-color: rgb(211, 237, 211);
+}
+
+.firstLine,
+.secondLine, 
+.thirdLine, 
+.fourthLine, 
+.fifthLine {
+    display: flex;
+}
+
+.num {
+    background-color:rgb(241, 198, 255);
+    width: 50px;
+    height: 35px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.operator, .evaluate {
+    background-color: rgb(255, 176, 231);
+    width: 50px;
+    height: 35px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+
+}
+
+.func {
+    background-color: aquamarine;
+    width: 50px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.firstLine {
+    justify-content: right;
+}
