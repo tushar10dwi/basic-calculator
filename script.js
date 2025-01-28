@@ -55,6 +55,7 @@ operator.forEach((button) => {
         display.textContent += button.textContent;
         op = button.textContent;
         lastButton = button.textContent;
+        console.log(display.textContent.slice(0,display.textContent.length-1));
     })
 })
 
@@ -78,13 +79,36 @@ function calculate(first,second,oper) {
 const evaluate = document.querySelector(".evaluate");
 
 evaluate.addEventListener('click', () => {
+    if(termCount === 1) {
+        term2 = display.textContent.replace(term1+lastButton,'');
+        console.log(term2);
+        termCount++;
+    }
 
     if (termCount === 2) {
         display.textContent = calculate(parseFloat(term1),parseFloat(term2),op);
         term1 = calculate(parseFloat(term1),parseFloat(term2),op);
-        termCount = 1;
+        termCount = 0;
     }
 });
+
+const clearButton = document.querySelector(".clearButton");
+const deleteButton = document.querySelector(".deleteButton");
+
+clearButton.addEventListener('click', () => {
+    display.textContent = '';
+    termCount = 0;
+})
+
+deleteButton.addEventListener('click', () => {
+    if(['+','-','/','x'].includes(display.textContent.charAt(display.textContent.length-1))){
+        display.textContent = display.textContent.slice(0,display.textContent.length-1);
+        termCount = 0;
+    }
+    else display.textContent = display.textContent.slice(0,display.textContent.length-1);
+    
+});
+
 
 
 
