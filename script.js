@@ -125,3 +125,44 @@ deleteButton.addEventListener('click', () => {
     
 });
 
+addEventListener('keydown', (e) => {
+    if(['Digit0','Digit1','Digit2','Digit3','Digit4','Digit5','Digit6','Digit7','Digit8','Digit9'].includes(e.code)) {
+        display.textContent += e.key;
+    }
+
+    if(['+','-','/','x'].includes(e.key)) {
+        if(['+','-','/','x'].includes(display.textContent.charAt(display.textContent.length-1))){
+            display.textContent = display.textContent.slice(0,display.textContent.length-1);
+            termCount = 0;
+        }
+    
+
+        if (termCount === 0) {
+            term1 = display.textContent;
+            console.log(term1);
+            termCount++;
+        }
+        
+        else if(termCount === 1) {
+            term2 = display.textContent.replace(term1+lastButton,'');
+            console.log(term2);
+            termCount++;
+        }
+
+        if (termCount === 2) {
+            display.textContent = calculate(parseFloat(term1),parseFloat(term2),op);
+            term1 = calculate(parseFloat(term1),parseFloat(term2),op);
+            termCount = 1;
+        }
+        
+        display.textContent += e.key;
+        op = e.key;
+        lastButton = e.key;
+    }
+    
+    if(e.key == "Enter") evaluate.click();
+
+    if(e.key == "Backspace") deleteButton.click();
+
+    if(e.key == "c") clearButton.click();
+})
