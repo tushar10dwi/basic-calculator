@@ -19,7 +19,14 @@ body {
 .displayMonitor {
     width: 300px;
     height: 75px;
+    box-sizing: border-box;
     background-color: rgb(211, 237, 211);
+    display: flex;
+    justify-content: right;
+    align-items: end;
+    padding: 10px;
+    font-size: 25px;
+    color: rgb(31, 92, 31);
 }
 
 .firstLine,
@@ -39,6 +46,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 10px;
+    border-radius: 10px;
 }
 
 .operator, .evaluate {
@@ -50,6 +58,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 10px;
+    border-radius: 10px;
 
 }
 

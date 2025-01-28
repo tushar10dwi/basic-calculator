@@ -14,6 +14,8 @@ function divide(a,b) {
     return a/b;
 }
 
+let decimalEntered = 0;
+
 const display = document.querySelector(".displayMonitor");
 
 const num = document.querySelectorAll(".num");
@@ -22,7 +24,7 @@ let term1, term2, op, backend;
 let termCount = 0;
 
 num.forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', numPress = function() {
         display.textContent += button.textContent;
 
     })
@@ -32,7 +34,13 @@ const operator = document.querySelectorAll(".operator");
 let lastButton;
 
 operator.forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', symbolPress = function() {
+
+        if(['+','-','/','x'].includes(display.textContent.charAt(display.textContent.length-1))){
+            display.textContent = display.textContent.slice(0,display.textContent.length-1);
+            termCount = 0;
+        }
+    
 
         if (termCount === 0) {
             term1 = display.textContent;
@@ -71,7 +79,10 @@ function calculate(first,second,oper) {
             return multiply(first,second);
             break;
         case '/':
-            return divide(first,second);
+            if(divide(first,second) == Infinity) {
+                return "Cannot divide by 0";
+            }
+            else return divide(first,second);
             break;
     }
 }
@@ -79,6 +90,11 @@ function calculate(first,second,oper) {
 const evaluate = document.querySelector(".evaluate");
 
 evaluate.addEventListener('click', () => {
+    if(['+','-','/','x'].includes(display.textContent.charAt(display.textContent.length-1))){
+        display.textContent = display.textContent.slice(0,display.textContent.length-1);
+        termCount = 0;
+    }
+
     if(termCount === 1) {
         term2 = display.textContent.replace(term1+lastButton,'');
         console.log(term2);
@@ -108,10 +124,4 @@ deleteButton.addEventListener('click', () => {
     else display.textContent = display.textContent.slice(0,display.textContent.length-1);
     
 });
-
-
-
-
-
-
 
