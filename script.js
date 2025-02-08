@@ -26,6 +26,7 @@ let termCount = 0;
 num.forEach((button) => {
     button.addEventListener('click', numPress = function() {
         display.textContent += button.textContent;
+        button.blur();
 
     })
 })
@@ -36,13 +37,17 @@ let lastButton;
 operator.forEach((button) => {
     button.addEventListener('click', symbolPress = function() {
 
-        if(['+','-','/','x'].includes(display.textContent.charAt(display.textContent.length-1))){
+        if(['+','-','/','*'].includes(display.textContent.charAt(display.textContent.length-1))){
             display.textContent = display.textContent.slice(0,display.textContent.length-1);
+            termCount = 0;
+        }
+
+        if(display.textContent == "") {
             termCount = 0;
         }
     
 
-        if (termCount === 0) {
+        if (termCount === 0 && display.textContent != "") {
             term1 = display.textContent;
             console.log(term1);
             termCount++;
@@ -64,6 +69,8 @@ operator.forEach((button) => {
         op = button.textContent;
         lastButton = button.textContent;
         console.log(display.textContent.slice(0,display.textContent.length-1));
+
+        button.blur();
     })
 })
 
@@ -75,13 +82,14 @@ function calculate(first,second,oper) {
         case '-':
             return minus(first,second);
             break;
-        case 'x':
+        case '*':
             return multiply(first,second);
             break;
         case '/':
             if(divide(first,second) == Infinity) {
                 return "Cannot divide by 0";
             }
+            
             else return divide(first,second);
             break;
     }
@@ -90,7 +98,7 @@ function calculate(first,second,oper) {
 const evaluate = document.querySelector(".evaluate");
 
 evaluate.addEventListener('click', () => {
-    if(['+','-','/','x'].includes(display.textContent.charAt(display.textContent.length-1))){
+    if(['+','-','/','*'].includes(display.textContent.charAt(display.textContent.length-1))){
         display.textContent = display.textContent.slice(0,display.textContent.length-1);
         termCount = 0;
     }
@@ -114,15 +122,17 @@ const deleteButton = document.querySelector(".deleteButton");
 clearButton.addEventListener('click', () => {
     display.textContent = '';
     termCount = 0;
+    clearButton.blur();
 })
 
 deleteButton.addEventListener('click', () => {
-    if(['+','-','/','x'].includes(display.textContent.charAt(display.textContent.length-1))){
+    if(['+','-','/','*'].includes(display.textContent.charAt(display.textContent.length-1))){
         display.textContent = display.textContent.slice(0,display.textContent.length-1);
         termCount = 0;
     }
     else display.textContent = display.textContent.slice(0,display.textContent.length-1);
-    
+
+    deleteButton.blur();
 });
 
 addEventListener('keydown', (e) => {
@@ -130,8 +140,8 @@ addEventListener('keydown', (e) => {
         display.textContent += e.key;
     }
 
-    if(['+','-','/','x'].includes(e.key)) {
-        if(['+','-','/','x'].includes(display.textContent.charAt(display.textContent.length-1))){
+    if(['+','-','/','*'].includes(e.key)) {
+        if(['+','-','/','*'].includes(display.textContent.charAt(display.textContent.length-1))){
             display.textContent = display.textContent.slice(0,display.textContent.length-1);
             termCount = 0;
         }

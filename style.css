@@ -28,6 +28,7 @@ body {
     padding: 10px;
     font-size: 25px;
     color: rgb(31, 92, 31);
+    overflow: hidden;
 }
 
 .firstLine,
